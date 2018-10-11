@@ -1,0 +1,23 @@
+{
+    "name": "antiphp/hydrator",
+    "description": "Hydrate and extract",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Reinecke",
+            "email": "christian.reinecke@web.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Antiphp\\Hydrator\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.0",
+        "zendframework/zend-hydrator": "^2.4",
+        "nayjest/str-case-converter": "^1.0"
+    }
+}
