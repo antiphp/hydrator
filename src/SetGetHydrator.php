@@ -41,12 +41,15 @@ class SetGetHydrator implements HydratorInterface
             if (strpos($methodName, 'get') !== 0) {
                 continue;
             }
+            if (!$reflectionMethod->isPublic()) {
+                continue;
+            }
             if ($reflectionMethod->getNumberOfRequiredParameters() !== 0) {
                 continue;
             }
-            $propertyName = substr($methodName, 3);
-            $propertyName = $this->convertAtoB($propertyName);
-            $data[$propertyName] = $reflectionMethod->invoke($object);
+            $keyName = substr($methodName, 3);
+            $keyName = $this->convertAtoB($keyName);
+            $data[$keyName] = $reflectionMethod->invoke($object);
         }
         return $data;
     }
