@@ -14,7 +14,7 @@ class SetGetHydrator implements HydratorInterface
     {
         $reflectionObject = new \ReflectionObject($object);
         foreach ($data as $key => $value) {
-            $methodName = 'set' . ucfirst($this->nameBtoA($key));
+            $methodName = 'set' . ucfirst($this->convertBtoA($key));
             if (!$reflectionObject->hasMethod($methodName)) {
                 continue;
             }
@@ -22,7 +22,10 @@ class SetGetHydrator implements HydratorInterface
             if (!$reflectionMethod->isPublic()) {
                 continue;
             }
-            if (!$reflectionMethod->getNumberOfRequiredParameters() !== 1) {
+            if ($reflectionMethod->getNumberOfRequiredParameters() > 1) {
+                continue;
+            }
+            if ($reflectionMethod->getNumberOfParameters() < 1) {
                 continue;
             }
             $reflectionMethod->invoke($object, $value);
@@ -42,18 +45,18 @@ class SetGetHydrator implements HydratorInterface
                 continue;
             }
             $propertyName = substr($methodName, 3);
-            $propertyName = $this->nameAtoB($propertyName);
+            $propertyName = $this->convertAtoB($propertyName);
             $data[$propertyName] = $reflectionMethod->invoke($object);
         }
         return $data;
     }
 
-    protected function nameAtoB($a): string
+    protected function convertAtoB($a): string
     {
         return Str::toSnakeCase($a);
     }
 
-    protected function nameBtoA($b): string
+    protected function convertBtoA($b): string
     {
         return Str::toCamelCase($b);
     }
