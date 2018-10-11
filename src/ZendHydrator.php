@@ -6,7 +6,7 @@ namespace Antiphp\Hydrator\Adapter;
 use Antiphp\Hydrator\HydratorInterface;
 use Zend\Hydrator\HydratorInterface as ZendHydratorInterface;
 
-class ZendHydratorWrapper implements ZendHydratorInterface
+class ZendHydrator implements ZendHydratorInterface
 {
     private $hydrator;
 
@@ -24,5 +24,4 @@ class ZendHydratorWrapper implements ZendHydratorInterface
     {
         return $this->hydrator->hydrate($data, $object);
     }
-
 }

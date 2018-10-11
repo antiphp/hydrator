@@ -17,7 +17,6 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^7.0",
-        "zendframework/zend-hydrator": "^2.4",
         "nayjest/str-case-converter": "^1.0"
     }
 }
