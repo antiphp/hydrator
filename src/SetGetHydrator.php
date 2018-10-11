@@ -5,6 +5,9 @@ namespace Antiphp\Hydrator;
 
 use Nayjest\StrCaseConverter\Str;
 
+/**
+ * Hydrator using set* and get* methods. Incompatible methods will be skipped.
+ */
 class SetGetHydrator implements HydratorInterface
 {
     public function hydrate(array $data, $object)
