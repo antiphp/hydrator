@@ -12,7 +12,7 @@ class SetGetHydrator implements HydratorInterface
 {
     /**
      * @param array $data
-     * @param $object
+     * @param object $object
      * @return mixed
      */
     public function hydrate(array $data, $object)
