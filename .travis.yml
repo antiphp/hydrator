@@ -1,0 +1,36 @@
+language: php
+
+sudo: false
+
+dist: xenial
+
+addons:
+  apt:
+    packages:
+    - parallel
+
+php:
+- 5.4
+- 5.5
+- 5.6
+- 7.0
+- 7.1
+- 7.2
+- nightly
+
+cache:
+  directories:
+  - vendor
+  - $HOME/.composer/cache
+
+before_script:
+  - composer install
+
+script:
+  - vendor/bin/phpstan analyse src --level 7
+  - vendor/bin/phpunit
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always

@@ -4,6 +4,8 @@ In need of an easy and fast hydrator I had issues with the
 most common hydrators so I build my own. No dependencies - only
 if you want to.
 
+[![Build Status](https://travis-ci.org/antiphp/hydrator.svg?branch=master)](https://travis-ci.org/antiphp/hydrator)
+
 # Hydrate
 
     $hydrator = new SetGetHydrator();
