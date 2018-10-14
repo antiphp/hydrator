@@ -7,27 +7,20 @@ if you want to.
 # Hydrate
 
     $hydrator = new SetGetHydrator();
-    $options  = $hydrator->hydrate(['foo' => 'bar'], new Example());
-    echo $options->getFoo(); // bar
+    $object = $hydrator->hydrate(['foo_bar' => 123], new Object());
+    echo $object->getFooBar(); // 123
 
-Considering `Example` to have `setFoo` (for hydration) and `getFoo` (for example usage) implemented.
+Considering `Object` to have `setFooBar($value)` and `getFoo()`
     
 # Extract
 
-    $foobar   = new Example();
-    $foobar->setFoo('bar');
+    $object = new Object();
+    $object->setFooBar(123);
     
     $hydrator = new SetGetHydrator();
-    $options  = $hydrator->extract($foobar);
+    $data = $hydrator->extract($object);
     
-    echo $options['foo']; // bar
-
-# More
-
-There is also a wrapper to fit `Zend\Hydrator\HydratorInterface`:
-
-    $hydrator = new ZendHydrator(new SetGetHydrator());
-    assert($hydrator instanceof Zend\Hydrator\HydratorInterface); // true
+    echo $data['foo_bar']; // 123
 
 
 # Why not ...
@@ -41,7 +34,7 @@ requires `zendframework/zend-servicemanager` which is annoying overhead.
 ## `ocramius/generated-hydrator`
 
 This package requires nikic/php-parser in an older version which is not 
-compatible to `phpstan/phpstan`:`^0.10.*`
+compatible to `phpstan/phpstan`:`^0.10.*`. I don't want to be blocked by dependencies.
 
 
 ## `samdark/hydrator`

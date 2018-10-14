@@ -10,6 +10,11 @@ use Nayjest\StrCaseConverter\Str;
  */
 class SetGetHydrator implements HydratorInterface
 {
+    /**
+     * @param array $data
+     * @param $object
+     * @return mixed
+     */
     public function hydrate(array $data, $object)
     {
         $reflectionObject = new \ReflectionObject($object);
@@ -19,9 +24,6 @@ class SetGetHydrator implements HydratorInterface
                 continue;
             }
             $reflectionMethod = $reflectionObject->getMethod($methodName);
-            if (!$reflectionMethod->isPublic()) {
-                continue;
-            }
             if ($reflectionMethod->getNumberOfRequiredParameters() > 1) {
                 continue;
             }
@@ -30,6 +32,7 @@ class SetGetHydrator implements HydratorInterface
             }
             $reflectionMethod->invoke($object, $value);
         }
+        return $object;
     }
 
     public function extract($object): array
@@ -39,9 +42,6 @@ class SetGetHydrator implements HydratorInterface
         foreach ($reflectionObject->getMethods(\ReflectionMethod::IS_PUBLIC) as $reflectionMethod) {
             $methodName = $reflectionMethod->getName();
             if (strpos($methodName, 'get') !== 0) {
-                continue;
-            }
-            if (!$reflectionMethod->isPublic()) {
                 continue;
             }
             if ($reflectionMethod->getNumberOfRequiredParameters() !== 0) {
