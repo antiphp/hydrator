@@ -12,7 +12,7 @@ if you want to.
     $object = $hydrator->hydrate(['foo_bar' => 123], new Object());
     echo $object->getFooBar(); // 123
 
-Considering `Object` to have `setFooBar($value)` and `getFoo()`
+Considering `Object` to have `setFooBar($value)` and `getFooBar()`
     
 # Extract
 
